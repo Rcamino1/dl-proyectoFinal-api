@@ -2,29 +2,13 @@ const express = require("express");
 const { Pool } = require("pg");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const { authenticateToken, isAdmin } = require("../../middlewares");
+const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
-
-// Middleware for JWT authentication
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-
-  if (!token) {
-    return res.sendStatus(401);
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.sendStatus(403);
-    }
-    req.user = decoded;
-    next();
-  });
-}
 
 // Route for creating a new user (no authentication required)
 router.post("/", async (req, res) => {
@@ -57,7 +41,7 @@ router.post("/", async (req, res) => {
 });
 
 // Route for getting all users (requires JWT authentication with admin role)
-router.get("/", authenticateToken, async (req, res) => {
+router.get("/", authenticateToken, isAdmin, async (req, res) => {
   if (req.user.role !== "admin") {
     return res.sendStatus(403);
   }
