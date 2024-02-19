@@ -2,28 +2,10 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { Pool } = require("pg");
 require("dotenv").config();
+const { authenticateToken, isAdmin } = require("../../middlewares");
 
 const router = express.Router();
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-
-// Middleware for JWT authentication
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-
-  if (!token) {
-    return res.sendStatus(401);
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.sendStatus(403);
-    }
-
-    req.user = decoded;
-    next();
-  });
-}
 
 // Route for adding a product to the cart (requires JWT authentication)
 router.post("/", authenticateToken, async (req, res) => {
