@@ -1,10 +1,10 @@
 import db from '../database.js';
 
-async function isAdminForCart(req, res, next) {
+async function isUserForCart(req, res, next) {
   try {
-    // Verificar si el usuario es un administrador
-    if (req.user.role !== "admin") {
-      return res.sendStatus(403);
+    // Verificar si el usuario está autenticado
+    if (!req.user) {
+      return res.sendStatus(401);
     }
 
     // Verificar si el carrito especificado en la solicitud pertenece al usuario actual
@@ -19,7 +19,7 @@ async function isAdminForCart(req, res, next) {
       return res.status(404).json({ message: "No such cart exists" });
     }
 
-    // Si llegamos aquí, el usuario es un administrador y el carrito pertenece al usuario actual
+    // Si llegamos aquí, el usuario está autenticado y el carrito pertenece al usuario actual
     next();
   } catch (error) {
     console.error(error);
@@ -27,4 +27,4 @@ async function isAdminForCart(req, res, next) {
   }
 }
 
-export default isAdminForCart;
+export default isUserForCart;
