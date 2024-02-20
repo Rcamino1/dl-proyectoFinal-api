@@ -1,0 +1,12 @@
+import express from 'express';
+import cartController from '../controllers/cartController.js';
+import { authenticateToken } from '../middlewares/auth.middlewares.js';
+
+const router = express.Router();
+
+router.post('/', authenticateToken, cartController.addItem);
+router.put('/:productId', authenticateToken, cartController.updateItemQuantity);
+router.get('/', authenticateToken, cartController.getCart);
+router.delete('/:productId', authenticateToken, cartController.removeItem);
+
+export default router;
