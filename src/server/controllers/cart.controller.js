@@ -1,4 +1,4 @@
-import Cart from '../models/Cart.js';
+const Cart = require("../models/cart.dao");
 
 const cartController = {
   async getAllItemsByUserId(req, res) {
@@ -27,7 +27,10 @@ const cartController = {
     try {
       const { cartItemId } = req.params;
       const { newQuantity } = req.body;
-      const updatedItem = await Cart.updateItemQuantity(cartItemId, newQuantity);
+      const updatedItem = await Cart.updateItemQuantity(
+        cartItemId,
+        newQuantity
+      );
       res.status(200).json(updatedItem);
     } catch (error) {
       console.error(error);
@@ -44,7 +47,7 @@ const cartController = {
       console.error(error);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  },
 };
 
-export default cartController;
+module.exports = cartController;
