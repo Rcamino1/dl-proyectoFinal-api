@@ -1,4 +1,4 @@
-const Product = require("../models/product.dao");
+const Product = require("../models/product.dao.js");
 
 const productController = {
   // Obtener todos los productos

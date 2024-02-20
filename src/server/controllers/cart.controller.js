@@ -1,4 +1,4 @@
-import Cart from '../models/Cart.js';
+import Cart from '../models/cart.dao.js';
 
 const cartController = {
   async getAllItemsByUserId(req, res) {

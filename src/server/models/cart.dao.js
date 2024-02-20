@@ -1,29 +1,25 @@
-import db from '../database.js';
+const { Pool } = require("pg");
 
-const Cart = {
-  async getAllItemsByUserId(userId) {
-    const query = 'SELECT * FROM Carro WHERE id_usuario = $1';
-    const values = [userId];
-    return db(query, values);
-  },
-
-  async addItem(userId, productId, quantity) {
-    const query = 'INSERT INTO Carro (id_usuario, id_producto, cantidad) VALUES ($1, $2, $3) RETURNING *';
-    const values = [userId, productId, quantity];
-    return db(query, values);
-  },
-
-  async updateItemQuantity(cartItemId, newQuantity) {
-    const query = 'UPDATE Carro SET cantidad = $1 WHERE id_carro = $2 RETURNING *';
-    const values = [newQuantity, cartItemId];
-    return db(query, values);
-  },
-
-  async removeItem(cartItemId) {
-    const query = 'DELETE FROM Carro WHERE id_carro = $1';
-    const values = [cartItemId];
-    return db(query, values);
-  }
+// Configuración de conexión a la base de datos utilizando variables de entorno
+const config = {
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
+  host: process.env.PG_HOST,
+  port: process.env.PG_PORT,
+  database: process.env.PG_DB,
 };
 
-export default Cart;
+// Crear un nuevo Pool de PostgreSQL con la configuración proporcionada
+const pool = new Pool(config);
+
+// Función para realizar consultas a la base de datos
+const db = (query, values) =>
+  pool
+    .query(query, values)
+    .then(({ rows }) => rows) // Devuelve las filas resultantes de la consulta
+    .catch(({ code, message }) => {
+      const error = { status: "[ERROR]", code, message }; // Formatear error
+      throw error; // Lanzar el error para que sea manejado por el controlador correspondiente
+    });
+
+export default db;
