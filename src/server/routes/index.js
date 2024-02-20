@@ -1,5 +1,13 @@
-export { default as auth } from "./auth.route.js";
-export { default as cart } from "./cart.route.js";
-export { default as product } from "./product.route.js";
-export { default as user } from "./user.route.js";
-export { default as errors } from "./errors.route.js";
+const auth = require("./auth.route.js");
+const cart = require("./cart.route.js");
+const product = require("./product.route.js");
+const user = require("./user.route.js");
+const errors = require("./errors.route.js");
+
+module.exports = {
+  auth,
+  cart,
+  product,
+  user,
+  errors,
+};

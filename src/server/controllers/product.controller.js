@@ -1,4 +1,5 @@
 const Product = require("../models/product.dao");
+const db = require("../database/db");
 
 const productController = {
   // Obtener todos los productos
