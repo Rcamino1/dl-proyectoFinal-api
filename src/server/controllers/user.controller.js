@@ -1,9 +1,9 @@
-import * as Usuario from "../models/user.dao.js";
-import { generateToken } from "../../utils/jwt.js";
-import { encrypt, compare } from "../../utils/bcrypt.js";
+const Usuario = require("../models/user.dao.js");
+const { generateToken, jwtVerify } = require("../../utils/jwt.js");
+const { encrypt, compare } = require("../../utils/bycript.js");
 
 // Controlador para el proceso de inicio de sesión
-export const login = async (req, res) => {
+exports.login = async (req, res) => {
   const { correo_electronico, contraseña } = req.body;
 
   try {
@@ -15,7 +15,6 @@ export const login = async (req, res) => {
       const token = generateToken({
         correo_electronico: user.correo_electronico,
         rol: user.rol,
-        lenguage: user.lenguage,
       });
       res.status(200).json({ token });  // Responder con un token en caso de éxito
     } else {
@@ -30,7 +29,7 @@ export const login = async (req, res) => {
 };
 
 // Controlador para registrar un nuevo usuario
-export const register = async (req, res) => {
+exports.register = async (req, res) => {
   const { nombre, apellido, correo_electronico, contraseña } = req.body;
 
   try {
@@ -55,7 +54,7 @@ export const register = async (req, res) => {
 };
 
 // Controlador para obtener datos de un usuario autenticado
-export const findUserByEmail = async (req, res) => {
+exports.findUserByEmail = async (req, res) => {
   try {
     const [, token] = req.headers.authorization.split(" ");
     const { correo_electronico } = jwtVerify(token);
@@ -69,4 +68,3 @@ export const findUserByEmail = async (req, res) => {
     });
   }
 };
-

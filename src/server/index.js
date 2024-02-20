@@ -1,13 +1,20 @@
-import express from 'express';
-import cors from 'cors';
-import { Pool } from 'pg';
-import { config } from 'dotenv';
-import authRoutes from './routes/auth.route.js';
-import cartRoutes from './routes/cart.route.js';
-import productRoutes from './routes/product.route.js';
-import userRoutes from './routes/user.route.js';
+const express = require('express');
+const cors = require('cors');
+const { config } = require('dotenv');
+const authRoutes = require('./routes/auth.route.js');
+const cartRoutes = require('./routes/cart.route.js');
+const productRoutes = require('./routes/product.route.js');
+const userRoutes = require('./routes/user.route.js');
 
 config();
+
+module.exports = {
+  startServer,
+  app
+};
+
+const pkg = require('pg');
+const { Pool } = pkg;
 
 const app = express();
 app.use(cors());
@@ -34,5 +41,3 @@ const startServer = async () => {
 
   return server;
 };
-
-export { startServer, app };
