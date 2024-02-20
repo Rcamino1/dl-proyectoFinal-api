@@ -1,6 +1,6 @@
 const request = require("supertest");
 const { Pool } = require("pg");
-const { startServer, app } = require("../src/index.js");
+const { startServer, app } = require("../src/server/index.js");
 
 describe("Auth Route", () => {
   let server;
