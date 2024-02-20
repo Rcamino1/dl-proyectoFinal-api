@@ -2,10 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
 require('dotenv').config();
-const authRoutes = require('./routes/auth');
-const cartRoutes = require('./routes/cart');
-const productRoutes = require('./routes/product');
-const userRoutes = require('./routes/user');
+const authRoutes = require('./src/routes/auth.js');
+const cartRoutes = require('./src/routes/cart.js');
+const productRoutes = require('./src/routes/product.js');
+const userRoutes = require('./src/routes/user.js');
 
 const app = express();
 app.use(cors());
