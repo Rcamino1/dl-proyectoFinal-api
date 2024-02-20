@@ -5,7 +5,7 @@ require("dotenv").config();
 const {
   authenticateToken,
   isAdmin,
-} = require("../middlewares/auth.middlewares");
+} = require("../middlewares/auth.middleware");
 const bcrypt = require("bcryptjs");
 
 const router = express.Router();
