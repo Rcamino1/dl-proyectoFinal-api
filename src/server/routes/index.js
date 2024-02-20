@@ -5,9 +5,9 @@ const user = require("./user.route.js");
 const errors = require("./errors.route.js");
 
 module.exports = {
-  auth,
-  cart,
-  product,
-  user,
-  errors,
+  auth: auth,
+  cart: cart,
+  product: product,
+  user: user,
+  errors: errors
 };

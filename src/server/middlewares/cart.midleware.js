@@ -1,4 +1,4 @@
-import db from '../database.js';
+const db = require('../database.js');
 
 async function isUserForCart(req, res, next) {
   try {
@@ -27,4 +27,4 @@ async function isUserForCart(req, res, next) {
   }
 }
 
-export default isUserForCart;
+module.exports = isUserForCart;

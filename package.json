@@ -1,6 +1,8 @@
 {
+  "name": "dl-proyectofinal-api",
+  "version": "1.0.0",
+  "type": "commonjs",
   "main": "app.js",
-  "type": "module",
   "scripts": {
     "test": "jest --forceExit",
     "start": "node app.js"

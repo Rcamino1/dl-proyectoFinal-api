@@ -1,2 +1,2 @@
 require('dotenv').config();
-import "./src/server/index.js";
+require("./src/server/index.js");

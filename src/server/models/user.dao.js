@@ -1,22 +1,28 @@
-import db from '../database/db.js'; // Importamos el módulo de base de datos
+const db = require('../database/db.js');
+const bcrypt = require('bcryptjs');
 
 const Usuario = {
   async login(email, password) {
     try {
-      // Buscamos al usuario por su correo electrónico y comprobamos la contraseña
+      // Buscamos al usuario por su correo electrónico
       const query = 'SELECT * FROM usuarios WHERE email = $1';
       const result = await db.query(query, [email]);
       const user = result.rows[0];
+
       if (!user) {
-        return null;
+        return null; // Si el usuario no existe, retornamos null
       }
       
-      // Aquí puedes comparar la contraseña ingresada con la contraseña almacenada en la base de datos
-      // Usando alguna función de comparación de contraseñas, por ejemplo, bcrypt.compare()
+      // Comparamos la contraseña ingresada con la contraseña almacenada en la base de datos
+      const passwordMatch = await bcrypt.compare(password, user.password);
 
-      return user;
+      if (passwordMatch) {
+        return user; // Si las contraseñas coinciden, retornamos el usuario
+      } else {
+        return null; // Si las contraseñas no coinciden, retornamos null
+      }
     } catch (error) {
-      throw error;
+      throw error; // Si hay un error, lo lanzamos para manejarlo en el controlador
     }
   },
 
@@ -44,4 +50,4 @@ const Usuario = {
   }
 };
 
-export default Usuario;
+module.exports = Usuario;
