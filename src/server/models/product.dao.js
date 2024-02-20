@@ -1,4 +1,4 @@
-import db from '../database.js';
+const db = require("../database/db");
 
 const Product = {
   // Obtener todos los productos
@@ -31,7 +31,8 @@ const Product = {
   async createProduct(productData) {
     try {
       const { nombre, precio, img_url, descripcion, detalle } = productData;
-      const query = "INSERT INTO producto (nombre, precio, img_url, descripcion, detalle) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+      const query =
+        "INSERT INTO producto (nombre, precio, img_url, descripcion, detalle) VALUES ($1, $2, $3, $4, $5) RETURNING *";
       const values = [nombre, precio, img_url, descripcion, detalle];
       const newProduct = await db(query, values);
       return newProduct[0];
@@ -44,7 +45,8 @@ const Product = {
   async updateProduct(id, productData) {
     try {
       const { nombre, precio, img_url, descripcion, detalle } = productData;
-      const query = "UPDATE producto SET nombre = $1, precio = $2, img_url = $3, descripcion = $4, detalle = $5 WHERE id = $6 RETURNING *";
+      const query =
+        "UPDATE producto SET nombre = $1, precio = $2, img_url = $3, descripcion = $4, detalle = $5 WHERE id = $6 RETURNING *";
       const values = [nombre, precio, img_url, descripcion, detalle, id];
       const updatedProduct = await db(query, values);
       if (updatedProduct.length === 0) {
@@ -65,8 +67,7 @@ const Product = {
     } catch (error) {
       throw error;
     }
-  }
+  },
 };
 
-export default Product;
-
+module.exports = Product;

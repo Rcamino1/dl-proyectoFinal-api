@@ -1,4 +1,4 @@
-import Product from '../models/Product.js';
+const Product = require("../models/product.dao");
 
 const productController = {
   // Obtener todos los productos
@@ -65,7 +65,7 @@ const productController = {
       console.error(error);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  },
 };
 
-export default productController;
+module.exports = productController;
