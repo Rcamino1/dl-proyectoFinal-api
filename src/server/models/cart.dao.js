@@ -22,4 +22,4 @@ const db = (query, values) =>
       throw error; // Lanzar el error para que sea manejado por el controlador correspondiente
     });
 
-export default db;
+export default Cart;

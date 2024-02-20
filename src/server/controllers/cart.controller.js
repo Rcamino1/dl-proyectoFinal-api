@@ -1,10 +1,10 @@
-import Cart from '../models/cart.dao.js';
+const Cart = require("../models/cart.dao");
 
 const cartController = {
-  async getAllItemsByUserId(req, res) {
+  async getCart(req, res) {
     try {
       const userId = req.params.userId; // Suponiendo que el userId se pasa como parámetro en la ruta
-      const cartItems = await Cart.getAllItemsByUserId(userId);
+      const cartItems = await Cart.getCart(userId);
       res.status(200).json(cartItems);
     } catch (error) {
       console.error(error);
@@ -27,7 +27,10 @@ const cartController = {
     try {
       const { cartItemId } = req.params;
       const { newQuantity } = req.body;
-      const updatedItem = await Cart.updateItemQuantity(cartItemId, newQuantity);
+      const updatedItem = await Cart.updateItemQuantity(
+        cartItemId,
+        newQuantity
+      );
       res.status(200).json(updatedItem);
     } catch (error) {
       console.error(error);
@@ -44,7 +47,7 @@ const cartController = {
       console.error(error);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  },
 };
 
-export default cartController;
+module.exports = cartController;
