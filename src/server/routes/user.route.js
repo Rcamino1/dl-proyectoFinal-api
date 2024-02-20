@@ -2,7 +2,10 @@ const express = require("express");
 const { Pool } = require("pg");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { authenticateToken, isAdmin } = require("../../../middlewares");
+const {
+  authenticateToken,
+  isAdmin,
+} = require("../middlewares/auth.middlewares");
 const bcrypt = require("bcryptjs");
 
 const router = express.Router();
