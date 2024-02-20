@@ -1,6 +1,4 @@
-import pkg from "pg";
-
-const { Pool } = pkg;
+const { Pool } = require("pg");
 
 // Configuración de conexión a la base de datos utilizando variables de entorno
 const config = {
@@ -18,10 +16,10 @@ const pool = new Pool(config);
 const db = (query, values) =>
   pool
     .query(query, values)
-    .then(({ rows }) => rows)  // Devuelve las filas resultantes de la consulta
+    .then(({ rows }) => rows) // Devuelve las filas resultantes de la consulta
     .catch(({ code, message }) => {
-      const error = { status: "[ERROR]", code, message };  // Formatear error
-      throw error;  // Lanzar el error para que sea manejado por el controlador correspondiente
+      const error = { status: "[ERROR]", code, message }; // Formatear error
+      throw error; // Lanzar el error para que sea manejado por el controlador correspondiente
     });
 
-export default db;
+module.exports = db;
