@@ -7,7 +7,6 @@ const cartRoutes = require("./server/routes/cart.route.js");
 const productRoutes = require("./server/routes/product.route.js");
 const userRoutes = require("./server/routes/user.route.js");
 const db = require("./server/database/db.js");
-const Cart = require("../models/cart.dao");
 
 const app = express();
 app.use(cors());

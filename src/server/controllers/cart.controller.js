@@ -1,10 +1,10 @@
 const Cart = require("../models/cart.dao");
 
 const cartController = {
-  async getAllItemsByUserId(req, res) {
+  async getCart(req, res) {
     try {
       const userId = req.params.userId; // Suponiendo que el userId se pasa como parámetro en la ruta
-      const cartItems = await Cart.getAllItemsByUserId(userId);
+      const cartItems = await Cart.getCart(userId);
       res.status(200).json(cartItems);
     } catch (error) {
       console.error(error);
