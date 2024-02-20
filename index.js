@@ -1,11 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const { Pool } = require('pg');
-require('dotenv').config();
-const authRoutes = require('./src/routes/auth.js');
-const cartRoutes = require('./src/routes/cart.js');
-const productRoutes = require('./src/routes/product.js');
-const userRoutes = require('./src/routes/user.js');
+const express = require("express");
+const cors = require("cors");
+const { Pool } = require("pg");
+require("dotenv").config();
+const authRoutes = require("./src/server/routes/auth.js");
+const cartRoutes = require("./src/server/routes/cart.js");
+const productRoutes = require("./src/server/routes/product.js");
+const userRoutes = require("./src/server/routes/user.js");
 
 const app = express();
 app.use(cors());
@@ -19,10 +19,10 @@ const pool = new Pool({
 });
 
 const startServer = async () => {
-  app.use('/auth', authRoutes);
-  app.use('/cart', cartRoutes);
-  app.use('/product', productRoutes);
-  app.use('/user', userRoutes);
+  app.use("/auth", authRoutes);
+  app.use("/cart", cartRoutes);
+  app.use("/product", productRoutes);
+  app.use("/user", userRoutes);
 
   const port = process.env.PORT || 3001;
 

@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { Pool } = require("pg");
 require("dotenv").config();
-const { authenticateToken, isAdmin } = require("../../middlewares");
+const { authenticateToken, isAdmin } = require("../../../middlewares");
 
 const router = express.Router();
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
