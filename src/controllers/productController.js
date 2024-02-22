@@ -37,7 +37,7 @@ const updateProduct = async (req, res) => {
   try {
     const { productId } = req.params;
     const productData = req.bodyM;
-    const userRole = req.userRole; // Falta este middleware todavía
+    const userRole = req.user.role; // Falta este middleware todavía
     const product = await productService.updateExistingProduct(
       productId,
       productData,

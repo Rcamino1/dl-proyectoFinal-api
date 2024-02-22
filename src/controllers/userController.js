@@ -24,7 +24,7 @@ const changePassword = async (req, res) => {
     const { userId, oldPassword, newPassword } = req.body; // Aquí hay que configurarlo para que le llegue el userId del token que va a tener asignado.
     const result = await userService.changeUserPassword(
       userId,
-      OldPassword,
+      oldPassword,
       newPassword
     );
     res.json({ message: result.message });
