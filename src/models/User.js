@@ -9,7 +9,11 @@ const findUserByEmail = async (email) => {
       'WHERE u.email = $1',
     [email]
   );
-  return rows[0];
+  const user = rows[0];
+  if (user) {
+    user.role = user.rol;
+  }
+  return user;
 };
 
 const createUser = async (user) => {
@@ -42,7 +46,11 @@ const findUserById = async (id) => {
       'WHERE u.id_usuario = $1',
     [id]
   );
-  return rows[0];
+  const user = rows[0];
+  if (user) {
+    user.role = user.rol;
+  }
+  return user;
 };
 
 module.exports = {
