@@ -24,7 +24,7 @@ const getProductById = async (req, res) => {
 const addNewProduct = async (req, res) => {
   // Falta middleware de autenticación todavía...
   try {
-    const userRole = req.userRole;
+    const userRole = req.user.role;
     const productData = req.body;
     const product = await productService.addNewProduct(productData, userRole);
     res.status(201).json(product);
