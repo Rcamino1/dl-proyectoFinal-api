@@ -36,7 +36,7 @@ const addNewProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { productId } = req.params;
-    const productData = req.bodyM;
+    const productData = req.body;
     const userRole = req.user.role; // Falta este middleware todavía
     const product = await productService.updateExistingProduct(
       productId,
@@ -52,7 +52,7 @@ const updateProduct = async (req, res) => {
 const removeProduct = async (req, res) => {
   try {
     const { productId } = req.params;
-    const userRole = req.userRole; // Falta este middleware todavía
+    const userRole = req.user.role; // Falta este middleware todavía
     await productService.removeProduct(productId, userRole);
     res.json({ message: 'Producto eliminado con éxito' });
   } catch (error) {

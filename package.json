@@ -4,7 +4,7 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "test": "jest --forceExit",
+    "test": "jest --setupFiles dotenv/config --forceExit",
     "start": "node app.js"
   },
   "dependencies": {
