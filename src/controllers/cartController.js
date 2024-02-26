@@ -23,6 +23,7 @@ const addToCart = async (req, res) => {
 // Función para actualizar la cantidad que lleva el user de un producto
 
 const updateCart = async (req, res) => {
+  console.log('addToCart controller reached', req.body);
   try {
     const { userId, productId, quantity } = req.body;
     const cartItem = await cartService.updateCart(userId, productId, quantity);

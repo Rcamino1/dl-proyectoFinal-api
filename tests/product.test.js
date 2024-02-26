@@ -36,7 +36,6 @@ describe('Product Endpoints', () => {
         descripcion: 'Nuevo Producto Test',
         detalle: 'Nuevo Producto Test Detalle',
       });
-    console.log(res.headers);
     expect(res.statusCode).toEqual(201);
   });
 
@@ -51,7 +50,6 @@ describe('Product Endpoints', () => {
         descripcion: 'Update Producto Test',
         detalle: 'Update Producto Test Detalle',
       });
-    console.log(res.headers);
     expect(res.statusCode).toEqual(200);
   });
 

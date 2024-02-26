@@ -41,6 +41,7 @@ const calculateCartTotal = async (userId) => {
       'WHERE c.id_usuario = $1',
     [userId]
   );
+  console.log('Calculated total:', result.rows[0].total);
   return rows[0].total;
 };
 

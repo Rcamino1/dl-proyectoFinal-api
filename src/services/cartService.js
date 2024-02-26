@@ -13,18 +13,22 @@ const getUserCart = async (userId) => {
 };
 
 const addToCart = async (userId, productId, quantity) => {
+  userId, productId, quantity;
   return await addItemToCart(userId, productId, quantity);
 };
 
 const updateCart = async (userId, productId, quantity) => {
+  userId, productId, quantity;
   return await updateCartItem(userId, productId, quantity);
 };
 
 const removeFromCart = async (userId, productId) => {
+  userId, productId, quantity;
   return await removeItemFromCart(userId, productId);
 };
 
 const getCartTotal = async (userId) => {
+  userId, productId, quantity;
   return await calculateCartTotal(userId);
 };
 

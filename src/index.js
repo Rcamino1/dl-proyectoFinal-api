@@ -12,9 +12,11 @@ app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/carts', cartRoutes);
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log(`Servidor ON en el puerto ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT;
+  app.listen(PORT, () => {
+    console.log(`Servidor ON en el puerto ${PORT}`);
+  });
+}
 
 module.exports = app;
