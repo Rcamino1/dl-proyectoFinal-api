@@ -37,8 +37,24 @@ describe('Cart Endpoints', () => {
         productId: productId,
         quantity: updatedQuantity,
       });
+    expect(res.statusCode).toEqual(200);
+  });
+  it('should retrieve the user cart', async () => {
+    const res = await request(app)
+      .get('/api/carts/')
+      .set('Authorization', `Bearer ${userToken}`);
 
     expect(res.statusCode).toEqual(200);
+    expect(Array.isArray(res.body)).toBeTruthy();
+  });
+
+  it('should calculate the total cost of the cart', async () => {
+    const res = await request(app)
+      .get('/api/carts/total')
+      .set('Authorization', `Bearer ${userToken}`);
+
+    expect(res.statusCode).toEqual(200);
+    expect(typeof res.body.total).toBe('number');
   });
 
   it('should remove an item from the cart', async () => {
@@ -48,24 +64,5 @@ describe('Cart Endpoints', () => {
       .send({ productId: productId });
 
     expect(res.statusCode).toEqual(200);
-  });
-
-  it('should retrieve the user cart', async () => {
-    const res = await request(app)
-      .get('/api/carts/') // Endpoint for retrieving the user cart
-      .set('Authorization', `Bearer ${userToken}`);
-
-    expect(res.statusCode).toEqual(200);
-    console.log(res.body);
-    expect(Array.isArray(res.body)).toBeTruthy(); // Check if the response is an array
-  });
-
-  it('should calculate the total cost of the cart', async () => {
-    const res = await request(app)
-      .get('/api/carts/total') // Endpoint for calculating the total cost
-      .set('Authorization', `Bearer ${userToken}`);
-
-    expect(res.statusCode).toEqual(200);
-    expect(typeof res.body.total).toBe('number'); // Check if 'total' is a number
   });
 });

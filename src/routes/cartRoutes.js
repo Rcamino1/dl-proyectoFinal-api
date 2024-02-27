@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get('/', authMiddleware, cartController.getUserCart);
 router.post('/addItem', authMiddleware, cartController.addToCart);
-router.put('/updateItem', authMiddleware, cartController.updateCart);
-router.delete('/removeItem', authMiddleware, cartController.removeFromCart);
+router.put('/updateItem', authMiddleware, cartController.updateCart); // El item que se updatea debe estar en el body
+router.delete('/removeItem', authMiddleware, cartController.removeFromCart); // Lo mismo aquí para el que se elimina
 router.get('/total', authMiddleware, cartController.getCartTotal);
 
 module.exports = router;
