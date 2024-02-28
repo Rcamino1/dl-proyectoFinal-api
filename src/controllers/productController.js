@@ -17,7 +17,7 @@ const getProductById = async (req, res) => {
     const product = await productService.getProductById(productId);
     res.json(product);
   } catch (error) {
-    res.status(404).json({ message: 'Producto no encontrado' });
+    res.status(404).json({ message: error.message });
   }
 };
 
