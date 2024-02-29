@@ -17,13 +17,26 @@ const findUserByEmail = async (email) => {
 };
 
 const createUser = async (user) => {
-  const { nombre, apellido, email, password, id_cred } = user;
+  const { nombre, apellido, email, password } = user;
   const hashedPassword = await bcrypt.hash(password, 10); // Hasheo de la password creada
 
-  const { rows } = await pool.query(
-    'INSERT INTO Usuario (nombre, apellido, email, password_hash, id_cred) VALUES ($1, $2, $3, $4, $5) RETURNING id_usuario, nombre, apellido, email, id_cred',
-    [nombre, apellido, email, hashedPassword, id_cred]
-  );
+  const roleQuery = 'Select id_cred FROM Rol Where rol = $1';
+  const roleResult = await pool.query(roleQuery, ['user']);
+  const id_cred = roleResult.rows[0].id_cred;
+
+  const insertQuery = `
+  INSERT INTO Usuario (nombre, apellido, email, password_hash, id_cred)
+  VALUES ($1, $2, $3, $4, $5)
+  RETURNING id_usuario, nombre, apellido, email, id_cred
+`;
+
+  const { rows } = await pool.query(insertQuery, [
+    nombre,
+    apellido,
+    email,
+    hashedPassword,
+    id_cred,
+  ]);
 
   return rows[0];
 };
