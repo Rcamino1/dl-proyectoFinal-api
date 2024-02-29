@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
   if (process.env.NODE_ENV === 'test') {
-    // Simulate a successful authentication by adding a mock user object
+    // Esto solo para test
     req.user = { id: 'mockUserId', role: 'mockUserRole' };
     return next();
   }
